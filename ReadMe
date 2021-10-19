@@ -1,0 +1,26 @@
+Steps to run application on gke: 
+Start minikube
+
+kubectl create -f service-sa-frontend-lb.yaml
+
+kubectl apply -f sa-frontend-deployment.yaml
+
+kubectl apply -f sa-logic-deployment.yaml --record
+
+kubectl apply -f service-sa-logic.yaml
+
+kubectl apply -f sa-web-app-deployment.yaml --record
+
+kubectl apply -f service-sa-web-app-lb.yaml
+
+kubectl get pods (should have 6 – 2 for each)
+
+kubectl get svc (should have 4)
+
+minikube service sa-frontend-lb
+-	This should give you a link that should take you to a new tab that runs the application
+
+
+I have uploaded all images of my progress on github. Here is a description of my process:
+Although I successfully followed all the steps, my application is not working on the GKE. I got it to work on my local machine. I made 3 containers and pushed them to the docker hub. I pulled them on GCP and deployed all the containers. I also created the services. I used the command “minikube service list” to get the SA-WebApp Loadbalancer IP. I changed the IP in the Apps.js file to this IP. I built the container again and pushed the new image to the docker hub. I changed the sa-frontend-deployment.yaml file to use the newer image and redid the deployment. Finally, using the command “minikube service sa-frontend-lb” I was expecting to see the application running.
+
