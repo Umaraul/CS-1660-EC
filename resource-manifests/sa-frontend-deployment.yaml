@@ -21,7 +21,7 @@ spec:
         app: sa-frontend                                  # 6
     spec:
       containers:
-        - image: umaraul/sentiment-analysis-frontend
+        - image: umaraul/sentiment-analysis-frontend:minikube
           imagePullPolicy: Always                         # 7
           name: sa-frontend
           ports:
